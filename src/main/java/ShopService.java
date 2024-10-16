@@ -32,4 +32,15 @@ public class ShopService {
                 .filter(order -> order.orderStatus() == status)
                 .collect(Collectors.toList());
     }
+
+    public Order updateOrder(String orderId, OrderStatus newOrderStatus) {
+        Order newOrder = orderRepo.getOrderById(orderId);
+        if (newOrder == null) {
+            throw new IllegalArgumentException("Order mit der ID " + orderId + " konnte nicht gefunden werden!");
+        }
+
+        Order oldOrder = newOrder.withOrderStatus(newOrderStatus);
+        orderRepo.addOrder(oldOrder);
+        return newOrder;
+    }
 }
