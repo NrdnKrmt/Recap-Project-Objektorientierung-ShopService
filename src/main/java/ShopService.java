@@ -16,8 +16,7 @@ public class ShopService {
                 products.add(productToOrder.get());
             }
             else {
-                System.out.println("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
-                return null;
+                throw new IllegalArgumentException("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
             }
         }
 
